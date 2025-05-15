@@ -46,7 +46,7 @@ nohup.out
 _output/
 _plots/
 result_gauge/
-xgeoclaw
+xgeo*
 .output
 .plots
 __pycache__/
