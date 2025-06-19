@@ -1,5 +1,26 @@
 #!/bin/bash
-fps=12
+usage_exit() {
+        echo "Usage: $0 [-r fps] " 1>&2
+        exit 1
+}
+
+## optional arg
+while getopts r:h OPT
+do
+    case $OPT in
+        r)  fps=$OPTARG
+            ;;
+        h)  usage_exit
+            ;;
+        \?) usage_exit
+            ;;
+    esac
+done
+if [ -z "$fps" ]; then
+    fps=12
+fi
+shift $((OPTIND - 1))
+
 figdir="_plots"
 if [ ! -d $figdir ]; then echo "Not found: directory $figdir" ; exit 0; fi
 
