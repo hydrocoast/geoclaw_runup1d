@@ -13,4 +13,5 @@ rsync -av "$1/" "$2/" --exclude="_output*/" --exclude="_plots/" \
 		      --exclude="xgeoclaw" --exclude="*.out" \
 		      --exclude="*.mod" --exclude="*.o" \
 		      --exclude="__pycache__/" --exclude="*.html" \
+		      --exclude="_gif/" \
 		      --exclude="*.sh.*" --exclude="*.png"

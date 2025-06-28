@@ -85,7 +85,7 @@ def setrun(claw_pkg='geoclaw'):
     from clawpack.geoclaw.data import BoussData1D
     rundata.add_data(BoussData1D(),'bouss_data')
 
-    rundata.bouss_data.bouss_equations = 2    # 0=SWE, 1=MS, 2=SGN
+    rundata.bouss_data.bouss_equations = 0    # 0=SWE, 1=MS, 2=SGN
     rundata.bouss_data.bouss_min_depth = 0.01  # depth to switch to SWE
 
     # ---------------
@@ -246,8 +246,8 @@ def setrun(claw_pkg='geoclaw'):
     #   currently only Manning friction with a single n=friction_coefficient
     #   is supported in 1d.
 
-    geo_data.friction_forcing = True
-    geo_data.manning_coefficient =.025
+    geo_data.friction_forcing = False
+    geo_data.manning_coefficient = 0.0
 
     geo_data.coordinate_system = 1  # linear distance (meters)
 
