@@ -2,7 +2,9 @@ clear
 close all
 
 %% filenames
-rundir = '../run_flat_wavetank/_output';
+% rundir = '../run_flat_wavetank/_output';
+rundir = '../run_slope50_wavetank/_output';
+
 list_files = dir(fullfile(rundir,'fort.q*'));
 nfile = size(list_files,1);
 

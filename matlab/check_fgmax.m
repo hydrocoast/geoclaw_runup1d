@@ -2,7 +2,8 @@ clear
 close all
 
 %% filename
-simdir = '../run_slope50_wavetank_nd_nofriction/_output';
+% simdir = '../run_slope50_wavetank_nd_nofriction/_output';
+simdir = '../run_slope50_wavetank/_output';
 fgmaxtxt = 'fgmax.txt';
 
 %% load
