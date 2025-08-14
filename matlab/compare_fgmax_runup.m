@@ -13,19 +13,6 @@ fgmaxtxt = 'fgmax.txt';
 [~,ind] = min(abs(topo));
 x_topo0 = xcell(ind);
 
-% dat = readmatrix(fullfile(simdir{1},fgmaxtxt),FileType="text",CommentStyle="#");
-% 
-% % # xcell, topo, hmax, smax, hssmax, etamax, arrival_time
-% % Extract relevant columns from the loaded data
-% xcell = dat(:, 1);
-% topo = dat(:, 2);
-% hmax = dat(:, 3);
-% smax = dat(:, 4);
-% hssmax = dat(:, 5);
-% etamax = dat(:, 6);
-% arrival_time = dat(:, 7);
-
-
 %% suppress to show the dry area
 dry1 = hmax1<1e-6;
 etamax(dry1) = NaN;
@@ -83,3 +70,17 @@ function [xcell,topo,hmax,smax,hssmax,etamax,arrival_time] = readfgmaxtxt(filena
     return
 
 end
+
+
+% dat = readmatrix(fullfile(simdir{1},fgmaxtxt),FileType="text",CommentStyle="#");
+% 
+% % # xcell, topo, hmax, smax, hssmax, etamax, arrival_time
+% % Extract relevant columns from the loaded data
+% xcell = dat(:, 1);
+% topo = dat(:, 2);
+% hmax = dat(:, 3);
+% smax = dat(:, 4);
+% hssmax = dat(:, 5);
+% etamax = dat(:, 6);
+% arrival_time = dat(:, 7);
+
