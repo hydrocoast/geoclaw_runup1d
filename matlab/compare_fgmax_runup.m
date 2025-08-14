@@ -56,6 +56,12 @@ set(ax2,FontName="Helvetica",FontSize=12,Box="on",GridColor="k");
 legend(ax2,[lA,lB,lG],["Dispersive (SGN)","Non-dispersive","Green's law"],FontSize=12,FontName="Helvetica",Location="southeast");
 
 
+%% export
+exportgraphics(fig,'runup1d_with_Greenslaw.png',ContentType='image',Resolution=150);
+
+
+
+%% local function
 function [xcell,topo,hmax,smax,hssmax,etamax,arrival_time] = readfgmaxtxt(filename)
     dat = readmatrix(filename,FileType="text",CommentStyle="#");
 
