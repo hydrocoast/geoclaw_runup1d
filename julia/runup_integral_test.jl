@@ -28,8 +28,8 @@ println("Setting up physical parameters...")
 # 基本パラメータ
 const g = 9.81          # 重力加速度 (m/s^2)
 h0 = 100.0        # 沖合の一定水深 (m)
-slope = 1/100     # 海岸の勾配 (無次元)
-H = 1.00          # 沖合の孤立波の波高 (m)
+slope = 1/50     # 海岸の勾配 (無次元)
+H = 1.0          # 沖合の孤立波の波高 (m)
 X1 = (h0 / slope)*1.25   # t=0 における孤立波の初期位置 (m)
 
 # 派生パラメータ
@@ -42,6 +42,7 @@ const γ_soliton = sqrt(3 * H / (4 * h0^3))    # 孤立波の形状パラメー�
 const α_synolakis = π / (2 * γ_soliton * h0)        # a = π/(2 κ d)（無次元）
 
 tmax_soliton = 1/c * (X1 + X0 - (0.366/γ_soliton))  # 孤立波が斜面に到達するまでの時間 (s)
+R = h0 * 2.831* sqrt(1/slope) *  (H/h0)^(5/4)     # Synolakis (1987) の最大遡上高予測 (m)
 
 # パラメータを辞書にまとめる
 params = Dict(
