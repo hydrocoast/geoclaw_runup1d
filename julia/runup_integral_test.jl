@@ -19,6 +19,8 @@
 using QuadGK
 using SpecialFunctions
 using CairoMakie
+using LaTeXStrings
+using Printf
 
 # --------------------------------------------------------------------------
 # 1. 物理パラメータの設定
@@ -28,7 +30,7 @@ println("Setting up physical parameters...")
 # 基本パラメータ
 const g = 9.81          # 重力加速度 (m/s^2)
 h0 = 100.0        # 沖合の一定水深 (m)
-slope = 1/50     # 海岸の勾配 (無次元)
+slope = 1/40     # 海岸の勾配 (無次元)
 H = 1.0          # 沖合の孤立波の波高 (m)
 X1 = (h0 / slope)*1.25   # t=0 における孤立波の初期位置 (m)
 
@@ -154,7 +156,7 @@ water_surface = [x > 0.0 ? initial_wave_profile(x, params) : NaN for x in x_doma
 # 海底地形
 seabed = [bathymetry_profile(x, params) for x in x_domain]
 
-lines!(ax_setup, x_domain, water_surface, color=:blue, linewidth=2, label="Initial Wave η(x,0)")
+lines!(ax_setup, x_domain, water_surface, color=:blue, linewidth=2, label="Initial wave η(x,0)")
 # 海底を塗りつぶして表現
 band!(ax_setup, x_domain, -h0, seabed, color=(:brown, 0.3), label="Seabed")
 # 静水面
@@ -166,9 +168,9 @@ ylims!(ax_setup, -1.1*h0, 0.1*h0) # y軸の表示範囲を調整
 
 # --- 下段：遡上高の時系列プロット ---
 ax_runup = Axis(fig[2, 1],
-    title = "Tsunami Runup on a Plane Slope (Synolakis, 1987)",
+    title = "Tsunami runup on a plane slope (Synolakis, 1987)",
     xlabel = "Time (s)",
-    ylabel = "Shoreline Elevation (m)",
+    ylabel = "Elevation at shoreline (m)",
     xlabelsize = 16,
     ylabelsize = 16,
     titlesize = 18
@@ -181,7 +183,7 @@ hlines!(ax_runup, [0.0], color = :black, linestyle = :dash, label = "Still Water
 max_runup, max_idx = findmax(R_vec)
 scatter!(ax_runup, [t_vec[max_idx]], [max_runup], color = :red, marker = :star5, markersize = 15)
 text!(ax_runup, t_vec[max_idx], max_runup,
-    text = " Max Runup: $(round(max_runup, digits=3)) m",
+    text = " Max elevation: $(round(max_runup, sigdigits=3)) m",
     align = (:left, :bottom),
     color = :red,
     fontsize = 14
@@ -189,7 +191,8 @@ text!(ax_runup, t_vec[max_idx], max_runup,
 axislegend(ax_runup, position = :lt)
 
 # プロットを保存
-save("tsunami_runup_simulation_with_setup.png", fig)
+figname = @sprintf("tsunami_runup_Synolakis1987_cot%03d.png", round(Int, 1/params[:slope]))
+save(figname, fig)
 
-println("Plot saved as tsunami_runup_simulation_with_setup.png")
+println("Plot saved as $figname")
 display(fig)
