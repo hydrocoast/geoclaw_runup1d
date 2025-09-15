@@ -30,9 +30,9 @@ println("Setting up physical parameters...")
 # 基本パラメータ
 const g = 9.81          # 重力加速度 (m/s^2)
 h0 = 100.0        # 沖合の一定水深 (m)
-slope = 1/40     # 海岸の勾配 (無次元)
+slope = 1/10     # 海岸の勾配 (無次元)
 H = 1.0          # 沖合の孤立波の波高 (m)
-X1 = (h0 / slope)*1.25   # t=0 における孤立波の初期位置 (m)
+X1 = (h0 / slope)*1.50   # t=0 における孤立波の初期位置 (m)
 
 # 派生パラメータ
 X0 = h0 / slope                               # 斜面の麓の位置 (m)
@@ -149,7 +149,7 @@ ax_setup = Axis(fig[1, 1],
     titlesize = 18
 )
 
-x_domain = range(-0.1*X0, 1.5*X0, length=501)
+x_domain = range(-0.1*X0, 2.0*X0, length=501)
 # 初期水面形
 water_surface = [x > 0.0 ? initial_wave_profile(x, params) : NaN for x in x_domain]
 #water_surface = [initial_wave_profile(x, params) for x in x_domain]
