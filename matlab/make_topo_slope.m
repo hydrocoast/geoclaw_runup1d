@@ -6,8 +6,8 @@ topodir = '../topo';
 
 %% flat bottom
 h0 = -100;
-dx = 1.0;
-length_flat = 2000;
+dx = 2.0;
+length_flat = 10000;
 x0 = 0.0;
 
 x_flat = (x0:dx:length_flat+x0)';
@@ -15,7 +15,7 @@ nx_flat = length(x_flat);
 
 %% slope
 s = 0.02; % slope
-h_land = 10;
+h_land = 20;
 length_slope = (h_land-h0)/s;
 x_slope = x_flat(end) + (dx:dx:length_slope)';
 nx_slope = length(x_slope);

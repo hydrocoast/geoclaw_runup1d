@@ -18,34 +18,22 @@ subroutine qinit(meqn,mbc,mx,xlower,dx,q,maux,aux)
     !locals
     integer :: i
 
-    !real(kind=8) :: h0, eta, eta_star, x0, ampl, u, u_star, c, kappa, a
-    !x0 = -9.14d0   ! initial location of wave
-    !a = 0.259d0  ! dimensionless amplitude
-    !h0 = 0.218d0  ! depth for scaling
-    !ampl = a*h0  ! amplitude
+    real(kind=8) :: h0, eta, eta_star, x0, ampl, u, u_star, c, gamma_w, a
 
-    !kappa = sqrt(3.d0*a / (4.d0*(a+1.d0)))
-    !c = sqrt(1.d0 + a)
-
-    real(kind=8) :: h0, eta, eta_star, x0, ampl, u, u_star, c, kappa, a
-
-    x0 = 1000.0d0
+    x0 = 5000.0d0
     a = 1.0d-2  ! dimensionless amplitude
     h0 = 100.0d0  ! depth for scaling
     ampl = a*h0  ! amplitude
-    !kappa = sqrt(3.d0*a / (4.d0*(a+1.d0)))
-    kappa = 5.0d-1
+    gamma_w = sqrt(3.d0*ampl / (4.d0*h0))
     c = sqrt(1.d0 + a)
 
     do i=1,mx
-        !eta = ampl / cosh(kappa*(xcell(i) - x0)/h0)**2
-        eta = ampl / cosh(kappa*(xcell(i) - x0)/h0)**2
+        eta = ampl / cosh(gamma_w*(xcell(i) - x0)/h0)**2
         eta_star = eta/h0
         u_star = c * eta_star/(1.d0 + eta_star)
         u = u_star * sqrt(9.81d0*h0)
         q(1,i) = max(sea_level, eta - aux(1,i))
         q(2,i) = q(1,i)*u
-
    enddo
 
 

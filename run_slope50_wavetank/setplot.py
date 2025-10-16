@@ -6,7 +6,7 @@ from clawpack.clawutil.data import ClawData
 import numpy
 
 
-xlimits = [0.0,7500.0]
+xlimits = [0.0,16000.0]
 
 
 topodir = os.path.join(os.getcwd(), '..', 'topo')
@@ -175,7 +175,7 @@ def setplot(plotdata):
     plotdata.print_fignos = 'all'            # list of figures to print
     plotdata.html = True                     # create html files of plots?
     plotdata.html_homelink = '../README.html'   # pointer for top of index
-    plotdata.latex = True                    # create latex file of plots?
+    plotdata.latex = False                    # create latex file of plots?
     plotdata.latex_figsperline = 2           # layout of plots
     plotdata.latex_framesperline = 1         # layout of plots
     plotdata.latex_makepdf = False           # also run pdflatex?

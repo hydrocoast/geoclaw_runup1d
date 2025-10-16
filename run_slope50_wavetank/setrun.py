@@ -133,7 +133,7 @@ def setrun(claw_pkg='geoclaw'):
         # Output ntimes frames at equally spaced times up to tfinal:
         # Can specify num_output_times = 0 for no output
         clawdata.num_output_times = 60
-        clawdata.tfinal = 600.0
+        clawdata.tfinal = 1200.0
         clawdata.output_t0 = True  # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
@@ -164,8 +164,6 @@ def setrun(claw_pkg='geoclaw'):
     #   (E.g. verbosity == 2 means print only on levels 1 and 2.)
     clawdata.verbosity = 0
 
-
-
     # --------------
     # Time stepping:
     # --------------
@@ -176,7 +174,7 @@ def setrun(claw_pkg='geoclaw'):
 
     # Initial time step for variable dt.
     # (If dt_variable==0 then dt=dt_initial for all steps)
-    clawdata.dt_initial = 0.01
+    clawdata.dt_initial = 0.1
 
     # Max time step to be allowed if variable dt used:
     clawdata.dt_max = 1.e9
@@ -271,7 +269,7 @@ def setrun(claw_pkg='geoclaw'):
     gauges.append([ 8, 0.7, 0.0, 1.e9])
     gauges.append([ 9, 0.8, 0.0, 1.e9])
     gauges.append([10, 0.9, 0.0, 1.e9])
-    gauges.append([11, 1.0, 0.0, 1.e9])
+    gauges.append([11, 0.9375, 0.0, 1.e9])
 
     return rundata
 
