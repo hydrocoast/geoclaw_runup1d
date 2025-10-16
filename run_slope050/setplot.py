@@ -6,13 +6,24 @@ from clawpack.clawutil.data import ClawData
 import numpy
 
 
-xlimits = [0.0,16000.0]
-
-
 topodir = os.path.join(os.getcwd(), '..', 'topo')
-topofile = 'slope_test50.dat'
+topofile = 'slope_test050.dat'
 grid_type = 2
 fname_celledges = os.path.join(topodir,topofile)
+mapc2p, mx_edge, xp_edge = make_mapc2p(fname_celledges)
+mx = mx_edge - 1
+print('Setting mx = %i, cell edges from %g to %g' % (mx,xp_edge[0],xp_edge[-1]))
+
+X_offset0 = 10000.0e0
+X_offset1 = 5000.0e0
+h0 = 100.0e0
+topo_max = 20.0e0
+slope = (topo_max + h0)/(xp_edge[-1] - X_offset0)
+X_shoreline = h0/slope + X_offset0
+Xn_shoreline = X_shoreline/xp_edge[-1]
+
+xlimits = [xp_edge[0], xp_edge[-1]]
+
 
 outdir2 = None
 #outdir2 = os.path.abspath('_output_ms')

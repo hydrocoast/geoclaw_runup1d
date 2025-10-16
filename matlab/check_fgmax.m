@@ -2,8 +2,14 @@ clear
 close all
 
 %% filename
-% simdir = '../run_slope50_wavetank_nd_nofriction/_output';
-simdir = '../run_slope50_wavetank/_output';
+% simdir = '../run_slope010_nofriction_SWE/_output';
+simdir = '../run_slope020_nofriction_SWE/_output';
+% simdir = '../run_slope050/_output';
+% simdir = '../run_slope050_nofriction/_output';
+% simdir = '../run_slope050_nofriction_SWE/_output';
+% simdir = '../run_slope100/_output';
+% simdir = '../run_slope100_nofriction/_output';
+% simdir = '../run_slope100_nofriction_SWE/_output';
 fgmaxtxt = 'fgmax.txt';
 
 %% load
@@ -45,7 +51,7 @@ lA = plot(xcell, etamax, '-', 'LineWidth', 2, Color=[0.0,0.0,1.0,0.7]);
 xlabel('{\it x} {\rm(m)}',FontName='Helvetica', FontSize=16);
 ylabel('Elevation (m)',FontName='Helvetica',FontSize=16);
 box on; grid on;
-ylim(ax,[-3,7]);
+ylim(ax,[-1,9]);
 set(ax, FontName="Helvetica", FontSize=14);
 % legend([lA,lG],["Simulated","Green's law"],FontSize=16,FontName="Helvetica",Location="southwest");
 
@@ -55,7 +61,7 @@ plot(xcell, topo, 'k-', 'LineWidth', 1.5); hold on
 lG = plot(xcell, etamax_gl, '-', 'LineWidth', 1.5, Color=[0.0,0.5,0.0,0.8]);
 lA = plot(xcell, etamax, 'b-', 'LineWidth', 1.5);
 xlim(ax2,[x_topo0-500,x_topo0+500]);
-ylim(ax2,[0,6]);
+ylim(ax2,[0,9]);
 grid on
 set(ax2,FontName="Helvetica",FontSize=12,Box="on",GridColor="k");
 legend(ax2,[lA,lG],["Simulated","Green's law"],FontSize=16,FontName="Helvetica",Location="southeast");

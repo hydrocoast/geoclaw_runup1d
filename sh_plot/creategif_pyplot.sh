@@ -17,7 +17,7 @@ do
     esac
 done
 if [ -z "$fps" ]; then
-    fps=12
+    fps=6
 fi
 shift $((OPTIND - 1))
 

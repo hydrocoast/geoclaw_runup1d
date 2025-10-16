@@ -12,12 +12,21 @@ from clawpack.geoclaw.nonuniform_grid_tools import make_mapc2p
 
 # Scratch directory for storing topo and dtopo files:
 topodir = os.path.join(os.getcwd(), '..', 'topo')
-topofile = 'slope_test50.dat'
+topofile = 'slope_test050.dat'
 grid_type = 2
 fname_celledges = os.path.join(topodir,topofile)
 mapc2p, mx_edge, xp_edge = make_mapc2p(fname_celledges)
 mx = mx_edge - 1
 print('Setting mx = %i, cell edges from %g to %g' % (mx,xp_edge[0],xp_edge[-1]))
+
+X_offset0 = 10000.0e0
+X_offset1 = 5000.0e0
+h0 = 100.0e0
+topo_max = 20.0e0
+slope = (topo_max + h0)/(xp_edge[-1] - X_offset0)
+X_shoreline = h0/slope + X_offset0
+Xn_shoreline = X_shoreline/xp_edge[-1]
+
 
 #------------------------------
 def setrun(claw_pkg='geoclaw'):
@@ -244,7 +253,7 @@ def setrun(claw_pkg='geoclaw'):
     #   currently only Manning friction with a single n=friction_coefficient
     #   is supported in 1d.
 
-    geo_data.friction_forcing = True
+    geo_data.friction_forcing = False
     geo_data.manning_coefficient =.025
 
     geo_data.coordinate_system = 1  # linear distance (meters)
@@ -259,17 +268,13 @@ def setrun(claw_pkg='geoclaw'):
     rundata.gaugedata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, t1, t2]
     gauges = rundata.gaugedata.gauges
-    gauges.append([ 1, 0.0, 0.0, 1.e9])
-    gauges.append([ 2, 0.1, 0.0, 1.e9])
-    gauges.append([ 3, 0.2, 0.0, 1.e9])
-    gauges.append([ 4, 0.3, 0.0, 1.e9])
-    gauges.append([ 5, 0.4, 0.0, 1.e9])
-    gauges.append([ 6, 0.5, 0.0, 1.e9])
-    gauges.append([ 7, 0.6, 0.0, 1.e9])
-    gauges.append([ 8, 0.7, 0.0, 1.e9])
-    gauges.append([ 9, 0.8, 0.0, 1.e9])
-    gauges.append([10, 0.9, 0.0, 1.e9])
-    gauges.append([11, 0.9375, 0.0, 1.e9])
+    gauges.append([ 1, X_offset1/xp_edge[-1], 0.0, 1.e9])
+    gauges.append([ 2, X_offset0/xp_edge[-1], 0.0, 1.e9])
+    gauges.append([ 3, (X_offset0+(0.20*h0/slope))/xp_edge[-1], 0.0, 1.e9])
+    gauges.append([ 4, (X_offset0+(0.40*h0/slope))/xp_edge[-1], 0.0, 1.e9])
+    gauges.append([ 5, (X_offset0+(0.60*h0/slope))/xp_edge[-1], 0.0, 1.e9])
+    gauges.append([ 6, (X_offset0+(0.80*h0/slope))/xp_edge[-1], 0.0, 1.e9])
+    gauges.append([ 7, (X_offset0+(1.00*h0/slope))/xp_edge[-1], 0.0, 1.e9])
 
     return rundata
 
